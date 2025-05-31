@@ -1,4 +1,6 @@
 import flet as ft
+from pages.stores.store import users 
+from pages.categories.data.gestion import ajouter_utilisateur, data
 
 def register_page(page: ft.Page):
     page.bgcolor = "#ffffff"
@@ -13,9 +15,9 @@ def register_page(page: ft.Page):
         icon=ft.icons.ARROW_BACK,
         icon_size=20,
         on_click=navigate_to_login,
-        bgcolor="#f3f9f9f2",
+        bgcolor="#ffffff",
         style=ft.ButtonStyle(
-            color="#2fc8ff",
+            color="#000000",
             
         ),
         width=34,
@@ -41,114 +43,167 @@ def register_page(page: ft.Page):
     )
     signUp = ft.Text(
         "Inscription",
-        size=25,
-        color="#83e85a",
+        size=17,
+        color="#ffffff",
         weight=ft.FontWeight.W_600,
         text_align=ft.TextAlign.CENTER,
         font_family="Georgia",
         italic=True,
     )
     
-    last_name_field = ft.TextField(
-        label="Nom",
-        hint_text="Entrez votre nom",
-        border_color="#ffffff",
-        border_radius=30,
-        color=ft.colors.WHITE,
-        bgcolor="#2f3a4b",
-        width=400,
-        filled=True,
+    last_name_field = ft.Container(
+        border=ft.border.only(bottom=ft.BorderSide(width=1, color=ft.colors.WHITE)),
+        content=ft.TextField(
+            label="Nom",
+            hint_text="Entrez votre nom",
+            color=ft.colors.WHITE,
+            bgcolor="#3e3e3f",
+            filled=True,
+            border=ft.InputBorder.NONE,
+        ),
+        width=300,
+        expand=True
     )
 
-    first_name_field = ft.TextField(
-        label="Prénom",
-        hint_text="Entrez votre prénom",
-        border_color="#ffffff",
-        border_radius=30,
-        color=ft.colors.WHITE,
-        bgcolor="#2f3a4b",
-        width=400,
-        filled=True,
+    first_name_field = ft.Container(
+        border=ft.border.only(bottom=ft.BorderSide(width=1, color=ft.colors.WHITE)),
+        content=ft.TextField(
+            label="Prénom",
+            hint_text="Entrez votre prénom",
+            color=ft.colors.WHITE,
+            bgcolor="#3e3e3f",
+            filled=True,
+            border=ft.InputBorder.NONE,
+        ),
+        width=300,
+        expand=True
     )
 
 
-    email_field = ft.TextField(
-        label="Email",
-        hint_text="Entrez votre email",
-        border_color="#ffffff",
-        border_radius=30,
-        color=ft.colors.WHITE,
-        bgcolor="#2f3a4b",
-        width=400,
-        filled=True,
+    email_field = ft.Container(
+        border=ft.border.only(bottom=ft.BorderSide(width=1, color=ft.colors.WHITE)),
+        content=ft.TextField(
+            label="Email",
+            hint_text="Entrez votre email",
+            color=ft.colors.WHITE,
+            bgcolor="#3e3e3f",
+            filled=True,
+            border=ft.InputBorder.NONE,
+        ),
+        width=300,
+        expand=True
     )
 
-    password_field = ft.TextField(
-        label="Mot de passe",
-        hint_text="Entrez votre mot de passe",
-        border_color="#ffffff",
-        border_radius=30,
-        color=ft.colors.WHITE,
-        bgcolor="#2f3a4b",
-        width=400,
-        filled=True,
-        password=True, 
-        can_reveal_password=True,  
+    password_field = ft.Container(
+        border=ft.border.only(bottom=ft.BorderSide(width=1, color=ft.colors.WHITE)),
+        content=ft.TextField(
+            label="Mot de passe",
+            hint_text="Entrer votre mot de passe",
+            color=ft.colors.WHITE,
+            bgcolor="#3e3e3f",
+            filled=True,
+            password=True,
+            can_reveal_password=True,
+            border=ft.InputBorder.NONE,
+        ),
+        width=300,
+        expand=True,
     )
 
-    confirm_password_field = ft.TextField(
-        label="Confirmation du mot de passe",
-        hint_text="Confirmez votre mot de passe",
-        border_color="#ffffff",
-        border_radius=30,
-        color=ft.colors.WHITE,
-        bgcolor="#2f3a4b",
-        width=400,
-        filled=True,
-        password=True, 
-        can_reveal_password=True,
+    confirm_password_field = ft.Container(
+        border=ft.border.only(bottom=ft.BorderSide(width=1, color=ft.colors.WHITE)),
+        content=ft.TextField(
+            label="Confirmation du mot de passe",
+            hint_text="Confirme votre mot de passe",
+            color=ft.colors.WHITE,
+            bgcolor="#3e3e3f",
+            filled=True,
+            password=True,
+            can_reveal_password=True,
+            border=ft.InputBorder.NONE,
+        ),
+        width=300,
+        expand=True,
     )
+
+    message = ft.Text(color="red")
+
+
+    def inscription(e):
+        last_name = last_name_field.content.value
+        first_name = first_name_field.content.value
+        email = email_field.content.value
+        password = password_field.content.value
+        confirm_password = confirm_password_field.content.value
+
+        if not last_name or not first_name or not email or not password or not confirm_password:
+            message.value = "Tous les champs sont obligatoires."
+            page.update()
+            return
+
+        if password != confirm_password:
+            message.value = "Les mots de passe ne correspondent pas."
+            page.update()
+            return
+
+        if any(user["email"] == email for user in data["utilisateurs"]):
+            message.value = "Cet email a déjà un compte."
+            page.update()
+            return
+
+        ajouter_utilisateur(email, last_name, first_name, password)
+
+        #message.value = "Inscription réussie !"
+        page.update()
+        page.go("/login")
 
     signup_button = ft.ElevatedButton(
         text="S'inscrire",
         width=200,
         height=40,
-        bgcolor="#83e85a",
+        bgcolor="#267BFA",
         color="#ffffff",
+        style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=0)),
+        on_click=inscription,
     )
+
+
     formulaire = ft.Container(
         content=ft.Column(
             [
-                last_name_field,
-                first_name_field,
-                email_field,
-                password_field,
-                confirm_password_field,
+                signUp, 
+                ft.Row([ft.Icon(name=ft.icons.PERSON,size=40,color="#267BFA"),last_name_field],alignment=ft.MainAxisAlignment.START,expand=True),
+                ft.Row([ft.Icon(name=ft.icons.PERSON_4_SHARP,size=40,color="#267BFA"),first_name_field],alignment=ft.MainAxisAlignment.START,expand=True),
+                ft.Row([ft.Icon(name=ft.icons.EMAIL,size=40,color="#267BFA"),email_field],alignment=ft.MainAxisAlignment.START,expand=True),
+                ft.Row([ft.Icon(name=ft.icons.LOCK,size=40,color="#267BFA"),password_field],alignment=ft.MainAxisAlignment.START,expand=True),
+                ft.Row([ft.Icon(name=ft.icons.VERIFIED_USER,size=40,color="#267BFA"),confirm_password_field],alignment=ft.MainAxisAlignment.START,expand=True),
+                message,
                 signup_button,
             ],
             alignment=ft.MainAxisAlignment.CENTER,
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
         ),
-        bgcolor="#21334d",
+        bgcolor="#272525",
         padding=20,
         margin=10,
-        border_radius=ft.border_radius.only(top_left=60, top_right=0, bottom_left=0,bottom_right=60),
+        border_radius=5,
         width=400,
-        height=400,
-        shadow=ft.BoxShadow(blur_radius=20, color="#2f3a4b", offset=(2, 4)),
+        height=430,
+        shadow=ft.BoxShadow(blur_radius=20, color="#18191b", offset=(2, 4)),
         opacity=0.8,
     )
 
     signup_container = ft.Column(
         [
-            ft.Divider(height=5, color="transparent"),  
+            ft.Divider(height=30, color="transparent"),  
             ft.Row([back_icon,title,logo_ispm], alignment=ft.MainAxisAlignment.SPACE_AROUND), 
             
-            ft.Divider(height=5, color="transparent"),  
-            signUp,  
+            #ft.Divider(height=5, color="transparent"),  
+             
             formulaire,
-            ft.Divider(height=20, color="transparent"),  
-            ft.Divider(height=20, color="transparent"),  
+            ft.Divider(height=150, color="transparent"),  
+            ft.Divider(height=150, color="transparent"),  
+            ft.Divider(height=50, color="transparent"),  
             
         ],
         alignment=ft.MainAxisAlignment.START,
@@ -173,7 +228,7 @@ def register_page(page: ft.Page):
                 #width=450,  
                 #height=900,
                 gradient=ft.LinearGradient(
-                    colors=["#5c6afd","#111827"],
+                    colors=["#242222","#16161F"],
                     begin=ft.alignment.top_center,
                     end=ft.alignment.bottom_center,
                 )
@@ -183,7 +238,7 @@ def register_page(page: ft.Page):
 
     main_container = ft.Container(
         content=centered_container,
-        expand=True,  
+        #expand=True,  
         alignment=ft.alignment.center, 
     )
 

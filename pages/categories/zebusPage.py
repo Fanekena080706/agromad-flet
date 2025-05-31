@@ -2,6 +2,11 @@ import flet as ft
 from flet import *
 import time
 from pages.categories.vaccination_page import get_vaccination_content
+from pages.categories.alimentation_page import get_alimentaton_content
+from pages.categories.sante_page import get_boeufs_page
+from pages.categories.production_page import get_production_page
+from pages.categories.ventes_page import get_ventes_page
+from pages.categories.rapports_page import get_rapports_page
 
 def zebus_page(page: ft.Page):
     page.title = "AgroMad - Gestion d'Élevage"
@@ -14,14 +19,14 @@ def zebus_page(page: ft.Page):
     # page isakarazany
     def get_page_content(page_name):
         contents = {
-            "Vaccination": get_vaccination_content(),
-            "Alimentation": ft.Text("Contenu Alimentation", size=30, color="black"),
-            "Santé": ft.Text("Contenu Santé", size=30, color="black"),
+            "Vaccination": get_vaccination_content(page),
+            "Alimentation": get_alimentaton_content(),
+            "Santé": get_boeufs_page(page),
             "Reproduction": ft.Text("Contenu Reproduction", size=30, color="black"),
-            "Production": ft.Text("Contenu Production", size=30, color="black"),
-            "Ventes": ft.Text("Contenu Ventes", size=30, color="black"),
+            "Production": get_production_page(page),
+            "Ventes": get_ventes_page(page),
             "Inventaire": ft.Text("Contenu Inventaire", size=30, color="black"),
-            "Rapports": ft.Text("Contenu Rapports", size=30, color="black")
+            "Rapports": get_rapports_page(page),
         }
         return contents.get(page_name, ft.Text("Page non trouvée", size=30, color="black"))
 
@@ -33,7 +38,11 @@ def zebus_page(page: ft.Page):
         content=get_page_content(current_page.value),
         alignment=ft.alignment.center,
         expand=True,
-        animate_opacity=animate_opacity(300)
+        animate_opacity=animate_opacity(300),
+        bgcolor="#0D0D0D",
+        padding=8,
+        border_radius=5,
+        shadow=ft.BoxShadow(blur_radius=20, color="#0e1013", offset=(2, 4)),
     )
 
     def change_page(e):
@@ -50,7 +59,7 @@ def zebus_page(page: ft.Page):
         
         for item in nav_bar.controls:
             if item.data == current_page.value:
-                item.border = ft.border.only(bottom=ft.border.BorderSide(3, "Green"))
+                item.border = ft.border.only(bottom=ft.border.BorderSide(3, "#D1C4C4"))
             else:
                 item.border = None
         page.update()
@@ -74,17 +83,20 @@ def zebus_page(page: ft.Page):
             content=ft.Column(
                 [
                     ft.Container(
-                        border=ft.border.all(2, "#83e85a"),
+                        border=ft.border.all(2, "#D1C4C4"),
                         border_radius=50,
                         content=ft.IconButton(
                             icon=type["icon"],
                             data=type["type"],
                             on_click=change_page,
+                            bgcolor= "#050505",
+                            style=ft.ButtonStyle(color="#D1C4C4"),
+                            
                         )
                     ),
                     ft.Text(
                         type["type"],
-                        color="#83e85a",
+                        color="#D1C4C4",
                         size=12,
                         weight="bold",
                         text_align=ft.TextAlign.CENTER,
@@ -96,7 +108,7 @@ def zebus_page(page: ft.Page):
             data=type["type"],
             on_click=change_page,
             padding=10,
-            border=ft.border.only(bottom=ft.border.BorderSide(3, "#83e85a")) if type["type"] == current_page.value else None,
+            border=ft.border.only(bottom=ft.border.BorderSide(3, "#D1C4C4")) if type["type"] == current_page.value else None,
             animate=ft.animation.Animation(300, "easeInOut"),
         )
         nav_items.append(nav_item)
@@ -111,22 +123,24 @@ def zebus_page(page: ft.Page):
     toot_container = ft.Container(
         content=ft.Column(
             [
+                ft.Divider(height=30, color="transparent"),
                 ft.Row(
                     [
                         ft.IconButton(
                             icon=ft.icons.ARROW_BACK,
                             icon_size=20,
                             on_click=navigate_home,
-                            bgcolor="#f3f9f9",
-                            style=ft.ButtonStyle(color="#2fc8ff"),
+                            bgcolor="#ffffff",
+                            style=ft.ButtonStyle(color="#000000"),
                             width=34,
                             height=34,
                             opacity=0.7,
+                            
                         ),
                         ft.Text(
                             "AgroMad",
                             size=30,
-                            color="#f3f9f9",
+                            color="#ffffff",
                             weight=ft.FontWeight.BOLD,
                             expand=True,
                             text_align=ft.TextAlign.CENTER,
@@ -141,6 +155,7 @@ def zebus_page(page: ft.Page):
                     alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
                     vertical_alignment=ft.CrossAxisAlignment.CENTER,
                 ),
+                ft.Divider(color="#000000", height=5),
                 ft.Container(
                     content=nav_bar,
                     padding=ft.padding.only(top=20, bottom=20),
@@ -156,7 +171,7 @@ def zebus_page(page: ft.Page):
         ),
         
         border_radius=20,
-        padding=20,
+        padding=7,
         expand=True,
     )
 
@@ -174,11 +189,12 @@ def zebus_page(page: ft.Page):
                 ),
                 alignment=ft.alignment.center, 
                 padding=0,  
-                border_radius=20, 
+                border_radius=5, 
                 #width=450,  
                 #height=900,
                 gradient=ft.LinearGradient(
-                    colors=["#5c6afd","#111827","#111827"],
+                    #colors=["#f0f1fa","#e4e4e4"],
+                    colors=["#242222","#16161F"],
                     begin=ft.alignment.top_left,
                     end=ft.alignment.bottom_right,
                 )

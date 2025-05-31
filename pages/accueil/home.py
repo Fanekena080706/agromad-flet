@@ -1,50 +1,152 @@
 import flet as ft
+from pages.stores.store import connector, users
 
 def accueil_page(page: ft.Page):
     page.horizontal_alignment = page.vertical_alignment = "center"
 
     def navigate_to_login(e):
+        connector.clear()
+        toggle_form(False)
         page.go("/login")
+
     def navigate_zebus(e):
         page.go("/categories/zebus")
 
     def navigate(e):
         page.go("/accueil/home")
-    
-    back_icon = ft.IconButton(
-        icon=ft.icons.ARROW_BACK,
-        icon_size=30,
-        on_click=navigate_to_login
-    )
 
     title = ft.Text(
         "AgroMad",
-        size=40,
+        size=30,
         color="#ffffff",
         weight=ft.FontWeight.BOLD,
         italic=True,
         text_align=ft.TextAlign.CENTER,
+        font_family="Georgia"
     )
 
     logo_ispm=ft.Image(
         src="images/ISPM.png",
-        width=65,
-        height=65,
+        width=55,
+        height=55,
         border_radius=50
     )
 
-    
-    texte = ft.Text(
-        "Catégories",
-        size=18,
-        color="#83e85a",
-        italic=True,    
-        text_align=ft.TextAlign.CENTER,
+    email_connector = ft.Container(
+        content=ft.Text(
+            connector[0]["email"][0].upper(),  # Get the first letter of the email and convert to uppercase
+            size=20,
+            color="#2072EC",
+            weight=ft.FontWeight.BOLD,
+            text_align=ft.TextAlign.CENTER,
+        ),
+        bgcolor="#121212",
+        border_radius=50,
+        border=ft.border.all(2, "#2072EC"),
+        height=40,
+        width=40,
+        alignment=ft.alignment.center,
+        on_click=lambda e: toggle_form(True),
     )
 
+    utilistateur = ft.Container(
+        content=ft.Text(
+            connector[0]["last_name"].capitalize() + " " + connector[0]["first_name"].capitalize(),
+            size=21,
+            color="#ffffff",
+            font_family="Georgia",
+            weight=ft.FontWeight.BOLD,
+            text_align=ft.TextAlign.CENTER,
+            italic=True,
+        )
+    )
+
+    vide = ft.Text(
+        "    ",
+    )
+
+    def toggle_form(visible):
+        email_info.visible = nom_info.visible = letters_info.visible = btn_deconnected.visible = btn_annuler.visible = form_container.visible = visible
+        page.update()
+
+    email_info=ft.Text(connector[0]["email"], visible=False, color="#E6EAF1", size=20, font_family="Georgia")
+    nom_info=ft.Text(connector[0]["last_name"].capitalize() + " " + connector[0]["first_name"].capitalize(), visible=False, color="#E6EAF1", size=20, font_family="Georgia")
+    letters_info=ft.Container(
+        content=ft.Text(
+            connector[0]["email"][0].upper(),  # Get the first letter of the email and convert to uppercase
+            size=20,
+            color="#E6EAF1",
+            weight=ft.FontWeight.BOLD,
+            text_align=ft.TextAlign.CENTER,
+        ),
+        bgcolor="blue",
+        border_radius=50,
+        border=ft.border.all(2, "#E6EAF1"),
+        height=40,
+        width=40,
+        alignment=ft.alignment.center,
+        visible=False,
+    )
+
+    btn_deconnected = ft.Container(
+        content=ft.Row(
+            [
+                ft.IconButton(
+                    icon=ft.icons.LOGOUT,
+                    icon_size=20,
+                    on_click=navigate_to_login,
+                    icon_color="#E6EAF1",
+                ),
+                ft.Text(
+                    "Déconnexion",
+                    size=12,
+                    color="#E6EAF1",
+                    weight=ft.FontWeight.BOLD,
+                    text_align=ft.TextAlign.CENTER,
+                ),
+            ],
+            alignment=ft.MainAxisAlignment.CENTER,
+        ),
+        on_click=navigate_to_login,
+        visible=False,
+        bgcolor="#FA213E",
+        border_radius=5,
+        padding=5,
+        width=200,
+    )
+
+    btn_annuler = ft.IconButton(
+        icon=ft.icons.CANCEL,
+        icon_size=30,
+        on_click=lambda e: toggle_form(False),
+        visible=False,
+        bgcolor="#0F0E15",
+        icon_color="#E6EAF1",
+    )
+
+    form_container = ft.Container(
+        content=ft.Column(
+            controls=[
+                ft.Row([btn_annuler],alignment=ft.MainAxisAlignment.END,),
+                letters_info,
+                email_info,
+                nom_info,
+                btn_deconnected,
+            ],alignment=ft.MainAxisAlignment.CENTER,
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+        ),
+        bgcolor="#31353B",
+        border_radius=10,
+        width=300,
+        height=250,
+        expand=True,
+        top=50,
+        left=20,
+        visible=False,
+    )
    
     #colors = [ft.colors.with_opacity(0.5,ft.colors.BLUE_100), ft.colors.with_opacity(0.8,ft.colors.YELLOW_100),ft.colors.with_opacity(0.8,ft.colors.GREEN_100),ft.colors.with_opacity(0.8,ft.colors.RED_100),ft.colors.with_opacity(0.8,ft.colors.PINK_100),ft.colors.with_opacity(0.8,ft.colors.ORANGE_100)]
-    colors = ["#263142","#2f3a4b","#21334d"]
+    colors = ["#0998ff","#0998ff","#0998ff"]
 
     def generate_categories():
         categories_data = [
@@ -57,15 +159,15 @@ def accueil_page(page: ft.Page):
         ]
 
         rows = []
-        for i in range(0, len(categories_data), 2):
-            row_categories = categories_data[i:i+2]
+        for i in range(0, len(categories_data), 3):
+            row_categories = categories_data[i:i+3]
             row = ft.Row(
                 [
                     ft.Container(
                         content=ft.Column(
                             [
-                                ft.Image(src=cat["icon"], width=40, height=40),
-                                ft.Text(cat["name"], text_align=ft.TextAlign.CENTER, size=14,color="#83e85a", weight=ft.FontWeight.BOLD,),
+                                ft.Image(src=cat["icon"], width=30, height=30),
+                                ft.Text(cat["name"], text_align=ft.TextAlign.CENTER, size=14,color="#ffffff", weight=ft.FontWeight.BOLD,),
                                 
                             ],
                             alignment=ft.MainAxisAlignment.CENTER,
@@ -78,72 +180,77 @@ def accueil_page(page: ft.Page):
                         alignment=ft.alignment.center,
                         bgcolor=colors[(i + j) % len(colors)],
                         width=170,
-                        height=140,
+                        height=100,
                         border_radius=16,
                         on_click=cat["lien"],
-                        shadow=ft.BoxShadow(blur_radius=20, color=colors[(i + j) % len(colors)], offset=(8, 12)),
+                        shadow=ft.BoxShadow(blur_radius=5, color="#2f3a4b", offset=(2, 4)),
                         expand=True,
                     )
                     for j,cat in enumerate(row_categories)
                 ],
                 alignment=ft.MainAxisAlignment.CENTER,
-                spacing=20,
+                spacing=5,
                 
             )
             rows.append(row)
 
-        return ft.Column(rows, spacing=5)
+        return ft.Column(rows, spacing=5, scroll="auto", expand=True)
 
     categories_container = ft.Container(
         content=ft.Column(
             [
-                generate_categories()
+                #generate_categories()
             ],
             scroll="auto",
             expand=True,
         ),
         padding=10,
         expand=True,
-        bgcolor="transparent",
-        border_radius=10,
+        bgcolor="#1A1717",
+        border_radius=5,
+        margin=10,
     )
 
     
     navigation_bar = ft.Container(
         content=ft.NavigationBar(
-            bgcolor="#217301",
+            bgcolor="#121416",
             height=100,
             destinations=[
-                ft.NavigationBarDestination(icon=ft.icons.PERSON, label="Profil"),
-                ft.NavigationBarDestination(icon=ft.icons.HOME, label="Accueil"),
-                ft.NavigationBarDestination(icon=ft.icons.SETTINGS, label="Paramètres"),
+                ft.NavigationBarDestination(icon=ft.Icon(ft.icons.PERSON, color="#ffffff", size=40) ),
+                ft.NavigationBarDestination(icon=ft.Icon(ft.icons.HOME, color="#ffffff", size=40)  ),
+                ft.NavigationBarDestination(icon=ft.Icon(ft.icons.NOTIFICATIONS, color="#ffffff", size=40)  ),
             ],
             on_change=lambda e: change_categories(e.control.selected_index),
             selected_index=1,
-        
         ),
         border_radius=20,
+        alignment=ft.alignment.top_center,
+        padding=2,
     )
 
     def change_categories(selected_index):
         if selected_index == 0:
-            categories_container.content = ft.Text("Profil", size=20, color="#2cb977")
+            categories_container.content = ft.Text("", size=20, color="#2cb977")
         elif selected_index == 1:
             categories_container.content = generate_categories()
         elif selected_index == 2:
-            categories_container.content = ft.Text("Paramètres", size=20, color="#2cb977")
+            categories_container.content = ft.Text("", size=20, color="#2cb977")
         page.update()
 
+    change_categories(1)
 
     accueil_container = ft.Column(
         [
-            ft.Divider(height=10, color="transparent"), 
-            ft.Row([back_icon,title,logo_ispm], alignment=ft.MainAxisAlignment.SPACE_AROUND,),
-            #title,
-            texte,
-            ft.Divider(height=3, color="#539756"), 
+            ft.Divider(height=30, color="transparent"), 
+            ft.Row([vide,title,logo_ispm], alignment=ft.MainAxisAlignment.SPACE_AROUND,),
+            ft.Divider(height=3, color="#000000"), 
+            ft.Row([utilistateur,vide,email_connector], alignment=ft.MainAxisAlignment.SPACE_AROUND,),
+            #title,"#020202"
+            #email_connector,
+            ft.Divider(height=3, color="#000000"), 
             categories_container,
-            navigation_bar
+            navigation_bar,
         ],
         expand=True,
         alignment=ft.MainAxisAlignment.CENTER,
@@ -169,11 +276,12 @@ def accueil_page(page: ft.Page):
                 #width=450,  
                 #height=900,
                 gradient=ft.LinearGradient(
-                    colors=["#5c6afd","#111827","#111827"],
+                    colors=["#242222","#16161F"],
                     begin=ft.alignment.top_left,
                     end=ft.alignment.bottom_right,
                 )
-            )
+            ),
+            form_container,
         ]
     )
 

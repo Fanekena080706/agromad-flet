@@ -1,0 +1,259 @@
+{
+    "boeufs": [
+        {
+            "id": "juo1",
+            "nom": "lop",
+            "race": "zebus",
+            "actif": true
+        },
+        {
+            "id": "loi6",
+            "nom": "roi",
+            "race": "zebus",
+            "actif": true
+        },
+        {
+            "id": "koi3",
+            "nom": "koute",
+            "race": "zebu",
+            "actif": true
+        },
+        {
+            "id": "koi3",
+            "nom": "koute",
+            "race": "zebu",
+            "actif": true
+        },
+        {
+            "id": "koi3",
+            "nom": "koute",
+            "race": "zebu",
+            "actif": true
+        },
+        {
+            "id": "koi3",
+            "nom": "koute",
+            "race": "zebu",
+            "actif": true
+        },
+        {
+            "id": "koi3",
+            "nom": "koute",
+            "race": "zebu",
+            "actif": true
+        },
+        {
+            "id": "koute2",
+            "nom": "dera",
+            "race": "",
+            "actif": true
+        },
+        {
+            "id": "lou6",
+            "nom": "",
+            "race": "zebu",
+            "actif": true
+        }
+    ],
+    "production": {
+        "2025-04-27": [
+            {
+                "id_boeuf": "loi6",
+                "litres": 5.0
+            },
+            {
+                "id_boeuf": "BOX1",
+                "litres": 4.0
+            }
+        ],
+        "2025-05-04": [
+            {
+                "id_boeuf": "juo1",
+                "litres": 5.0
+            },
+            {
+                "id_boeuf": "juo1",
+                "litres": 4.0
+            },
+            {
+                "id_boeuf": "loi6",
+                "litres": 2.0
+            },
+            {
+                "id_boeuf": "koi3",
+                "litres": 1.0
+            },
+            {
+                "id_boeuf": "koi3",
+                "litres": 4.0
+            }
+        ]
+    },
+    "ventes": {
+        "2025-04-27": {
+            "litres_vendus": 3.0,
+            "prix_litre": 1000.0,
+            "revenu": 3000.0
+        },
+        "2025-05-28": {
+            "litres_vendus": 2.0,
+            "prix_litre": 1000.0,
+            "revenu": 2000.0
+        }
+    },
+    "utilisateurs": [
+        {
+            "email": "manoh@gmail.com",
+            "last_name": "manohy",
+            "first_name": "fanekena",
+            "password": "080706",
+            "boeufs": [],
+            "ventes": {},
+            "production": {}
+        },
+        {
+            "email": "man@gmail.com",
+            "last_name": "manou",
+            "first_name": "fanek",
+            "password": "1234",
+            "boeufs": [
+                {
+                    "id": "BOU1",
+                    "nom": "mala",
+                    "race": "zebus",
+                    "sexe": "femelle",
+                    "actif": true,
+                    "production": {
+                        "2025-05-28": [
+                            {
+                                "litres": 5.0
+                            },
+                            {
+                                "litres": 4.0
+                            },
+                            {
+                                "litres": 2.0
+                            }
+                        ]
+                    },
+                    "vacination": [
+                        {
+                            "date": "26/05/2025",
+                            "type": "Fi\u00e8vre Aphteuse"
+                        },
+                        {
+                            "date": "20/04/2025",
+                            "type": "Brucellose"
+                        },
+                        {
+                            "date": "",
+                            "type": "Charbon"
+                        },
+                        {
+                            "date": "",
+                            "type": "Fi\u00e8vre Aphteuse"
+                        },
+                        {
+                            "date": "",
+                            "type": "Brucellose"
+                        }
+                    ]
+                },
+                {
+                    "id": "MAXI1",
+                    "nom": "molou",
+                    "race": "zebus",
+                    "sexe": "male",
+                    "actif": false,
+                    "production": [],
+                    "vacination": [
+                        {
+                            "date": "20/05/2025",
+                            "type": "Brucellose"
+                        },
+                        {
+                            "date": "12/01/2025",
+                            "type": "Charbon"
+                        },
+                        {
+                            "date": "12/08/2023",
+                            "type": "Fi\u00e8vre Aphteuse"
+                        }
+                    ]
+                },
+                {
+                    "id": "BOU3",
+                    "nom": "fax",
+                    "race": "zebus",
+                    "sexe": "femelle",
+                    "actif": true,
+                    "production": {
+                        "2025-05-28": [
+                            {
+                                "litres": 6.0
+                            },
+                            {
+                                "litres": 3.0
+                            }
+                        ],
+                        "2025-05-29": [
+                            {
+                                "litres": 2.0
+                            }
+                        ]
+                    },
+                    "vacination": []
+                },
+                {
+                    "id": "BOU4",
+                    "nom": "doud",
+                    "race": "zebus",
+                    "sexe": "femelle",
+                    "actif": true,
+                    "production": {
+                        "2025-05-29": [
+                            {
+                                "litres": 6.0
+                            }
+                        ]
+                    },
+                    "vacination": []
+                }
+            ],
+            "ventes": {
+                "2025-05-28": {
+                    "litres_vendus": 6.0,
+                    "prix_litre": 1083.3333333333333,
+                    "revenu": 6500.0
+                },
+                "2025-05-29": {
+                    "litres_vendus": 1.0,
+                    "prix_litre": 1500.0,
+                    "revenu": 1500.0
+                }
+            },
+            "production": {
+                "2025-05-28": [
+                    {
+                        "id": "BOU3",
+                        "litres": 3.0
+                    },
+                    {
+                        "id": "BOU4",
+                        "litres": 4.0
+                    }
+                ],
+                "2025-05-29": [
+                    {
+                        "id": "BOU4",
+                        "litres": 6.0
+                    },
+                    {
+                        "id": "BOU3",
+                        "litres": 2.0
+                    }
+                ]
+            }
+        }
+    ]
+}

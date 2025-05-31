@@ -65,7 +65,7 @@ def welcome_page(page: ft.Page):
     textAgro = ft.Text(
         "AgroMad",
         size=30,
-        color="#83e85a",
+        color="#ffffff",
         weight=ft.FontWeight.BOLD,
         font_family="Georgia",
     )
@@ -89,7 +89,7 @@ def welcome_page(page: ft.Page):
         "Bienvenue sur",
         size=25,
         weight=ft.FontWeight.BOLD,
-        color="#83e85a",
+        color="#ffffff",
         font_family="Arial",
         italic=True,
     )
@@ -98,7 +98,7 @@ def welcome_page(page: ft.Page):
         texts[0],
         size=15,
         weight=ft.FontWeight.BOLD,
-        color=ft.colors.WHITE,
+        color=ft.colors.BLACK,
         text_align=ft.TextAlign.CENTER,
         italic=True,
         font_family="Georgia",
@@ -128,10 +128,11 @@ def welcome_page(page: ft.Page):
         text="Next",
         width=200,
         height=40,
-        bgcolor="#83e85a",
-        color="#ffffff",
+        bgcolor="#ffffff",
+        color="#0998ff",
         animate_scale=ft.Animation(200, "easeInOut"),
         on_click=navigate_to_intro,
+        style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=0)),
     )
 
     contText = ft.Container(
@@ -152,12 +153,22 @@ def welcome_page(page: ft.Page):
         opacity=1,
         margin=20,
         #expand=True,
+        #bgcolor="white",
+        shadow=[
+            ft.BoxShadow(
+                blur_radius=100,
+                spread_radius=1,
+                color=ft.colors.WHITE,
+                offset=ft.Offset(2,2),
+            )
+        ],
+        alignment=ft.alignment.center,
     )
 
     welcome_container =ft.Column(
         [
-            ft.Divider(height=10, color="transparent"),
-            ft.Row([textVide,textVide,logo_ispm], alignment=ft.MainAxisAlignment.SPACE_AROUND),
+            ft.Divider(height=20, color="transparent"),
+            ft.Row([textVide,textVide,logo_ispm], alignment=ft.MainAxisAlignment.END),
             logo,
             contText,
             but,
@@ -179,7 +190,7 @@ def welcome_page(page: ft.Page):
                     [
                         welcome_container,
                     ],
-                    alignment=ft.MainAxisAlignment.CENTER,
+                    alignment=ft.MainAxisAlignment.START,
                     horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                 ),
                 alignment=ft.alignment.center, 
@@ -189,7 +200,7 @@ def welcome_page(page: ft.Page):
                 #height=900,
                 blur=ft.Blur(1.5,1.5),
                 gradient=ft.LinearGradient(
-                    colors=["#5c6afd","#111827","#111827"],
+                    colors=["#0998ff"],
                     begin=ft.alignment.top_center,
                     end=ft.alignment.bottom_center,
                 ),

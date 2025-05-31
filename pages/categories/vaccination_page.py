@@ -1,6 +1,8 @@
 import flet as ft
+from pages.stores.store import connector
+from pages.categories.data.gestion import ajouter_vaccination,data
 
-def get_vaccination_content():
+def get_vaccination_content(page: ft.Page):
     
     image1=ft.Image(
         src="assets/images/exemple1.jpg",
@@ -20,12 +22,14 @@ def get_vaccination_content():
         size=12,
         font_family="Georgia",
         expand=True,
+        color="#fafafa"
     )
     text2 =ft.Text(
         "La vaccination joue un rôle clé dans la prévention des maladies infectieuses en élevage. Elle permet de protéger non seulement l'animal vacciné, mais aussi le troupeau dans son ensemble, en réduisant la propagation des agents pathogènes.",
         size=12,
         font_family="Georgia",
         expand=True,
+        color="#ffffff"
     )
     # Données de vaccination (exemple)
     vaccins = [
@@ -103,6 +107,53 @@ def get_vaccination_content():
             "image":"assets/images/10rage.jpg",
         },
     ]
+
+    # pour ajouter une vaccination
+    
+    id_bouef = ft.Dropdown(
+                        options=[ft.dropdown.Option(a["id"]) for a in connector[0]["boeufs"]],
+                        label="Animal",
+                        width=200,
+                        color="#ffffff",
+                        border_color=ft.colors.WHITE,
+                        border_width=1,
+                        border_radius=5,
+                    )
+    type_vaccin = ft.Dropdown(
+                        options=[
+                            ft.dropdown.Option("Fièvre Aphteuse"),
+                            ft.dropdown.Option("Brucellose"),
+                            ft.dropdown.Option("Charbon"),
+                        ],
+                        label="Type de vaccin",
+                        width=200,
+                        color="#ffffff",
+                        border_color=ft.colors.WHITE,
+                        border_width=1,
+                    )
+
+    date = ft.TextField(label="Date", width=150,color="#ffffff",border_color=ft.colors.WHITE,border_width=1,border_radius=5)
+    message = ft.Text("", color= "#f6a75c" )
+
+    def ajouter_vacc_click(e):
+        # Récupération des valeurs du formulaire
+        id_boeuf = id_bouef.value
+        type_vaccin_value = type_vaccin.value
+        date_value = date.value
+        
+        if not id_boeuf or not type_vaccin_value or not date_value:
+            message.value = "Tous les champs sont obligatoires."
+            page.update()
+            return
+        # Ajout de la vaccination
+        ajouter_vaccination(id_boeuf, date_value, type_vaccin_value)
+        
+        # Réinitialisation du formulaire
+        id_bouef.value = ""
+        type_vaccin.value = ""
+        date.value = ""
+        message.value = "Vaccination ajoutée avec succès."
+        page.update()
     
     # Création des lignes du tableau
     rows = []
@@ -115,9 +166,9 @@ def get_vaccination_content():
         rows.append(
             ft.DataRow(
                 cells=[
-                    ft.DataCell(ft.Text(vaccin["nom"],color="white",weight="bold")),
-                    ft.DataCell(ft.Text(vaccin["date"],color="white",weight="bold")),
-                    ft.DataCell(ft.Text(vaccin["prochaine"],color="white",weight="bold")),
+                    ft.DataCell(ft.Text(vaccin["nom"],color="#ffffff",weight="bold")),
+                    ft.DataCell(ft.Text(vaccin["date"],color="#ffffff",weight="bold")),
+                    ft.DataCell(ft.Text(vaccin["prochaine"],color="#ffffff",weight="bold")),
                     ft.DataCell(status_icon),
                     ft.DataCell(
                         ft.IconButton(
@@ -135,7 +186,7 @@ def get_vaccination_content():
     # Contenu principal
     content = ft.Column(
         controls=[
-            ft.Text("Gestion des Vaccinations", size=25, weight="bold", color="#83e85a"),
+            ft.Text("Gestion des Vaccinations", size=25, weight="bold", color="#0998ff"),
             ft.Divider(height=10, color="transparent"),
             #images
             ft.Row([image1,text1], alignment=ft.MainAxisAlignment.START,width=400,),
@@ -147,7 +198,7 @@ def get_vaccination_content():
                 height=400,
                 content=ft.Column(
                     [
-                        ft.Text("Types des vaccinations", size=16, weight="bold", color="white", font_family="Georgia"),
+                        ft.Text("Types des vaccinations", size=16, weight="bold", color="#006ebd", font_family="Georgia"),
                         ft.Container(
                             height=300,  # Hauteur fixe pour scroll vertical
                             content=ft.Column(
@@ -156,10 +207,10 @@ def get_vaccination_content():
                                         [
                                             ft.DataTable(
                                                 columns=[
-                                                    ft.DataColumn(ft.Text("Image", color="black", font_family="Georgia")),
-                                                    ft.DataColumn(ft.Text("Nom du vaccin", color="black", font_family="Georgia")),
-                                                    ft.DataColumn(ft.Text("Periode de\nVaccination", color="black", font_family="Georgia")),
-                                                    ft.DataColumn(ft.Text("Description", color="black", font_family="Georgia")),
+                                                    ft.DataColumn(ft.Text("Image", color="#ffffff", font_family="Georgia")),
+                                                    ft.DataColumn(ft.Text("Nom du vaccin", color="#ffffff", font_family="Georgia")),
+                                                    ft.DataColumn(ft.Text("Periode de\nVaccination", color="#ffffff", font_family="Georgia")),
+                                                    ft.DataColumn(ft.Text("Description", color="#ffffff", font_family="Georgia")),
                                                 ],
                                                 rows=[
                                                     ft.DataRow(
@@ -172,19 +223,19 @@ def get_vaccination_content():
                                                             ),
                                                             ft.DataCell(
                                                                 ft.Container(
-                                                                    content=ft.Text(v["nom"], color="white", weight="bold"),
+                                                                    content=ft.Text(v["nom"], color="#ffffff", weight="bold"),
                                                                     padding=10
                                                                 )
                                                             ),
                                                             ft.DataCell(
                                                                 ft.Container(
-                                                                    content=ft.Text(v["periode"], color="white", weight="bold"),
+                                                                    content=ft.Text(v["periode"], color="#ffffff", weight="bold"),
                                                                     padding=10
                                                                 )
                                                             ),
                                                             ft.DataCell(
                                                                 ft.Container(
-                                                                    content=ft.Text(v["desc"], color="white", weight="bold"),
+                                                                    content=ft.Text(v["desc"], color="#ffffff", weight="bold"),
                                                                     padding=10
                                                                 )
                                                             ),
@@ -205,12 +256,13 @@ def get_vaccination_content():
                                 expand=True
                             ),
                             padding=10,
-                            border=ft.border.all(1, ft.colors.GREEN),
+                            border=ft.border.all(1, ft.colors.BLUE),
                             border_radius=10,
                         ),
                     ],
                     spacing=20,
                 ),
+                bgcolor=ft.colors.with_opacity(0.6, "#2B2B2B"),
             ),
 
 
@@ -274,17 +326,17 @@ def get_vaccination_content():
                 height=300,  # Hauteur fixe pour le conteneur
                 content=ft.Column(
                     [
-                        ft.Text("Historique des vaccinations", size=16, weight="bold",color="white",font_family="Georgia"),
+                        ft.Text("Historique des vaccinations", size=16, weight="bold",color="#ffffff",font_family="Georgia"),
                         ft.Container(
                             content=ft.Row(
                                 [
                                     ft.DataTable(
                                         columns=[
-                                            ft.DataColumn(ft.Text("Nom du vaccin",color="black",font_family="Georgia")),
-                                            ft.DataColumn(ft.Text("Date administration",color="black",font_family="Georgia")),
-                                            ft.DataColumn(ft.Text("Prochaine dose",color="black",font_family="Georgia")),
-                                            ft.DataColumn(ft.Text("Statut",color="black",font_family="Georgia")),
-                                            ft.DataColumn(ft.Text("Actions",color="black",font_family="Georgia")),
+                                            ft.DataColumn(ft.Text("Nom du vaccin",color="#ffffff",font_family="Georgia")),
+                                            ft.DataColumn(ft.Text("Date administration",color="#ffffff",font_family="Georgia")),
+                                            ft.DataColumn(ft.Text("Prochaine dose",color="#ffffff",font_family="Georgia")),
+                                            ft.DataColumn(ft.Text("Statut",color="#ffffff",font_family="Georgia")),
+                                            ft.DataColumn(ft.Text("Actions",color="#ffffff",font_family="Georgia")),
                                         ],
                                         rows=rows,
                                         column_spacing=20,  # Espacement entre colonnes
@@ -296,61 +348,45 @@ def get_vaccination_content():
                                 scroll=ft.ScrollMode.AUTO,  # Activation du défilement horizontal
                             ),
                             padding=10,
-                            border=ft.border.all(1, ft.colors.WHITE24),
+                            border=ft.border.all(1, ft.colors.WHITE),
                             border_radius=10,
                         )
                     ],
                     spacing=10
                 ),
-                bgcolor=ft.colors.with_opacity(0.6, ft.colors.WHITE12),
+                bgcolor=ft.colors.with_opacity(0.6, "#2B2B2B"),
                 border_radius=10,
             ),
             
             ft.Divider(height=20, color="transparent"),
             
             # Formulaire d'ajout
-            ft.Text("Nouvelle Vaccination", size=18, weight="bold",color="white"),
+            ft.Text("Nouvelle Vaccination", size=18, weight="bold",color="#ffffff"),
             ft.Column(
                 controls=[
-                    ft.Dropdown(
-                        options=[ft.dropdown.Option(a["id"]) for a in animaux],
-                        label="Animal",
-                        width=200,
-                        color="white",
-                        border_color=ft.colors.WHITE,
-                        border_width=1,
-                        border_radius=5,
-                    ),
-                    ft.Dropdown(
-                        options=[
-                            ft.dropdown.Option("Fièvre Aphteuse"),
-                            ft.dropdown.Option("Brucellose"),
-                            ft.dropdown.Option("Charbon"),
-                        ],
-                        label="Type de vaccin",
-                        width=200,
-                        color="white",
-                        border_color=ft.colors.WHITE,
-                        border_width=1,
-                    ),
-                    ft.TextField(label="Date", width=150,color="white",border_color=ft.colors.WHITE,border_width=1,border_radius=5),
-                    ft.TextField(label="Prochaine dose", width=150,color="white",border_color=ft.colors.WHITE,border_width=1,border_radius=5),
+                    message,
+                    id_bouef,
+                    type_vaccin,
+                    date,
+                   
                 ],
                 spacing=20,
             ),
             ft.ElevatedButton(
                 "Enregistrer",
                 icon=ft.icons.SAVE,
-                on_click=save_vaccination,
+                on_click=lambda e: ajouter_vacc_click(e),
+                bgcolor="#4CAF50",
+                color="white",
             ),
             
             # Calendrier des vaccins
             ft.Divider(height=30, color="transparent"),
-            ft.Text("Calendrier Vaccinal", size=18, weight="bold",color="white"),
+            ft.Text("Calendrier Vaccinal", size=18, weight="bold",color="#ffffff"),
             ft.Container(
                 content=ft.Text("Calendrier visuel des vaccins à venir", italic=True),
                 padding=20,
-                bgcolor=ft.colors.with_opacity(0.5, ft.colors.WHITE10),
+                bgcolor=ft.colors.with_opacity(0.5, "#2B2B2B"),
                 border_radius=10,
                 alignment=ft.alignment.center,
                 height=200,
