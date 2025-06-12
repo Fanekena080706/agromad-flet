@@ -41,7 +41,7 @@ def login_page(page: ft.Page):
     title = ft.Text(
         "AgroMad",
         size=30,
-        color="#ffffff",
+        color="#2e7d32",
         font_family="Georgia",
         weight=ft.FontWeight.BOLD,
         text_align=ft.TextAlign.CENTER,
@@ -49,21 +49,24 @@ def login_page(page: ft.Page):
     login = ft.Text(
         "Connexion",
         size=17,
-        color="#ffffff",
+        color="#2e7d32",
         weight=ft.FontWeight.W_600,
         text_align=ft.TextAlign.CENTER,
         font_family="Georgia",
         italic=True,
     )
 
+    logo =ft.Image(src="images/logo1.png", width=50, height=50)
+        
+        
     
     last_name =ft.Container(
-        border=ft.border.only(bottom=ft.BorderSide(width=1, color=ft.colors.WHITE)),
+        border=ft.border.only(bottom=ft.BorderSide(width=1, color=ft.colors.BLACK)),
         content=ft.TextField(
             label="Nom",
             hint_text="Entrez votre nom",
-            color=ft.colors.WHITE,
-            bgcolor="#3e3e3f",
+            color=ft.colors.BLACK,
+            bgcolor="#cff4d2",
             filled=True,
             border=ft.InputBorder.NONE,
         ),
@@ -71,12 +74,12 @@ def login_page(page: ft.Page):
         expand=True
     )
     first_name =ft.Container(
-        border=ft.border.only(bottom=ft.BorderSide(width=1, color=ft.colors.WHITE)),
+        border=ft.border.only(bottom=ft.BorderSide(width=1, color=ft.colors.BLACK)),
         content=ft.TextField(
             label="Prénom",
             hint_text="Entrez votre prénom",
-            color=ft.colors.WHITE,
-            bgcolor="#3e3e3f",
+            color=ft.colors.BLACK,
+            bgcolor="#cff4d2",
             filled=True,
             border=ft.InputBorder.NONE,
         ),
@@ -85,12 +88,12 @@ def login_page(page: ft.Page):
     )
 
     password_field = ft.Container(
-        border=ft.border.only(bottom=ft.BorderSide(width=1, color=ft.colors.WHITE)),
+        border=ft.border.only(bottom=ft.BorderSide(width=1, color=ft.colors.BLACK)),
         content=ft.TextField(
             label="Mot de passe",
             hint_text="Entrer votre mot de passe",
-            color=ft.colors.WHITE,
-            bgcolor="#3e3e3f",
+            color=ft.colors.BLACK,
+            bgcolor="#cff4d2",
             filled=True,
             password=True,
             can_reveal_password=True,
@@ -123,7 +126,7 @@ def login_page(page: ft.Page):
         text="Connexion",
         width=200,
         height=40,
-        bgcolor="#267BFA",
+        bgcolor="#2e7d32",
         color="#ffffff",
         on_click=connexion,
         style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=0)),
@@ -133,14 +136,14 @@ def login_page(page: ft.Page):
         controls=[
             ft.Text(
                 "Vous n'avez pas de compte? ",
-                color="#ffffff",
+                color="#000000",
                 size=14,
                 ),
             ft.TextButton(
                 text="Créer un compte",
                 on_click=navigete_to_register,
                 style=ft.ButtonStyle(
-                    color="#267BFA",
+                    color="#1b5e20",
                     
                 ),
             ),
@@ -152,10 +155,10 @@ def login_page(page: ft.Page):
     formulaire = ft.Container(
         content=ft.Column(
             [
-                login, 
-                ft.Row([ft.Icon(name=ft.icons.PERSON,size=40,color="#267BFA"),last_name],alignment=ft.MainAxisAlignment.START,expand=True),
-                ft.Row([ft.Icon(name=ft.icons.PERSON_4_SHARP,size=40,color="#267BFA"),first_name],alignment=ft.MainAxisAlignment.START,expand=True),
-                ft.Row([ft.Icon(name=ft.icons.LOCK,size=40,color="#267BFA"),password_field],alignment=ft.MainAxisAlignment.START,expand=True),
+                logo, 
+                ft.Row([ft.Icon(name=ft.icons.PERSON,size=40,color="#424242"),last_name],alignment=ft.MainAxisAlignment.START,expand=True),
+                ft.Row([ft.Icon(name=ft.icons.PERSON_4_SHARP,size=40,color="#424242"),first_name],alignment=ft.MainAxisAlignment.START,expand=True),
+                ft.Row([ft.Icon(name=ft.icons.LOCK,size=40,color="#424242"),password_field],alignment=ft.MainAxisAlignment.START,expand=True),
                 message,
                 login_button,
                 signup_text,
@@ -163,14 +166,14 @@ def login_page(page: ft.Page):
             alignment=ft.MainAxisAlignment.CENTER,
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
         ),
-        bgcolor="#272525",
+        bgcolor="#fff8e1",
         padding=20,
         margin=10,
         border_radius=5,
         width=400,
-        height=380,
+        height=420,
         opacity=0.8,
-        shadow=ft.BoxShadow(blur_radius=20, color="#18191b", offset=(2, 4)),
+        shadow=ft.BoxShadow(blur_radius=20, color="#4d6453", offset=(2, 4)),
         expand=True,
         animate_opacity=ft.Animation(300, "easeInOut"),
         animate=ft.animation.Animation(300, "easeInOut"),
@@ -188,11 +191,12 @@ def login_page(page: ft.Page):
         ],
         alignment=ft.MainAxisAlignment.START,
         horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+        expand=True,
     )
 
     centered_container = ft.Stack(
         controls=[
-            #ft.Image(src="images/bg11.jpg", width=450, height=900, fit=ft.ImageFit.COVER,border_radius=20,opacity=0.4),
+            #ft.Image(src="images/bg7.jpeg", width=float('inf'), height=float('inf'), fit=ft.ImageFit.COVER, border_radius=20, opacity=1, expand=True),
             
             ft.Container(
                 content=ft.Column(
@@ -208,10 +212,12 @@ def login_page(page: ft.Page):
                 #width=450,  
                 #height=900,
                 gradient=ft.LinearGradient(
-                    colors=["#242222","#16161F"],
+                    colors=["#f7fffc","#f7fffc"],
                     begin=ft.alignment.top_center,
                     end=ft.alignment.bottom_center,
-                )
+                ),
+                expand=True,
+                blur=ft.Blur(1.5, 1.5),
             )
         ],
     )

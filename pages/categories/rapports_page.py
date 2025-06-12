@@ -29,13 +29,13 @@ def get_rapports_page(page: ft.Page):
                                         ft.Text(f"Boeuf: {prod.get('id_boeuf', prod.get('id', ''))}", size=14, color="#5a85e8", font_family="Georgia"),
                                         ft.Text(f"Litres produits: {prod['litres']:,.2f} L", size=14, color="#5a85e8", font_family="Georgia"),
                                         ft.Row([
-                                            ft.Text(f"{email_connector}", size=10, color="#e0e1e4", font_family="Georgia"),
+                                            ft.Text(f"{email_connector}", size=10, color="#313132", font_family="Georgia"),
                                         ], alignment=ft.MainAxisAlignment.END)
                                     ],
                                     spacing=5,
                                 ),
                                 border_radius=10,
-                                bgcolor="#3E3E3E",
+                                bgcolor="#C5E0BD",
                                 margin=2,
                                 padding=ft.padding.only(left=10, right=10, top=0, bottom=10),
                                 alignment=ft.alignment.center,
@@ -60,13 +60,13 @@ def get_rapports_page(page: ft.Page):
                                     ft.Text(f"Prix/L: {vente['prix_litre']:,.2f} Ar", size=14, color="#5a85e8", font_family="Georgia"),
                                     ft.Text(f"Revenu: {vente['revenu']:,.2f} Ar", size=14, color="#5a85e8", font_family="Georgia"),
                                     ft.Row([
-                                        ft.Text(f"{email_connector}", size=10, color="#ffffff", font_family="Georgia"),
+                                        ft.Text(f"{email_connector}", size=10, color="#313132", font_family="Georgia"),
                                     ], alignment=ft.MainAxisAlignment.END),
                                 ],
                                 spacing=5,
                             ),
                             border_radius=10,
-                            bgcolor="#3E3E3E",
+                            bgcolor="#C5E0BD",
                             margin=2,
                             padding=ft.padding.only(left=10, right=10, top=0, bottom=10),
                             alignment=ft.alignment.center,
@@ -91,7 +91,7 @@ def get_rapports_page(page: ft.Page):
                             ft.Row(
                                 [
                                     ft.Container(
-                                        content=ft.Text(str(total_lait), size=16, weight="bold", color="#ffffff", font_family="Georgia"),
+                                        content=ft.Text(str(total_lait), size=16, weight="bold", color="#000000", font_family="Georgia"),
                                         alignment=ft.alignment.center,
                                         width=80,
                                         height=80,
@@ -100,7 +100,7 @@ def get_rapports_page(page: ft.Page):
                                         border=ft.border.all(4, "#265FB4"),
                                     ),
                                     ft.Container(
-                                        content=ft.Text(str(total_vendu_value), size=16, weight="bold", color="#ffffff", font_family="Georgia"),
+                                        content=ft.Text(str(total_vendu_value), size=16, weight="bold", color="#000000", font_family="Georgia"),
                                         alignment=ft.alignment.center,
                                         width=80,
                                         height=80,
@@ -109,7 +109,7 @@ def get_rapports_page(page: ft.Page):
                                         border=ft.border.all(4, "#27B63C"),
                                     ),
                                     ft.Container(
-                                        content=ft.Text(str(lait_restant_value), size=16, weight="bold", color="#ffffff", font_family="Georgia"),
+                                        content=ft.Text(str(lait_restant_value), size=16, weight="bold", color="#000000", font_family="Georgia"),
                                         alignment=ft.alignment.center,
                                         width=80,
                                         height=80,
@@ -121,17 +121,17 @@ def get_rapports_page(page: ft.Page):
                             ),
                             ft.Row(
                                 [
-                                    ft.Text("Total lait produit(L)", size=13, color="#ffffff", font_family="Georgia"),
-                                    ft.Text("Total lait vendu(Ar)", size=13, color="#ffffff", font_family="Georgia"),
-                                    ft.Text("Lait restant(L)", size=13, color="#ffffff", font_family="Georgia"),
+                                    ft.Text("Total lait produit(L)", size=13, color="#000000", font_family="Georgia"),
+                                    ft.Text("Total lait vendu(Ar)", size=13, color="#000000", font_family="Georgia"),
+                                    ft.Text("Lait restant(L)", size=13, color="#000000", font_family="Georgia"),
                                 ], alignment=ft.MainAxisAlignment.SPACE_AROUND,
                             ),
                         ])
                     ),
                     ft.Divider(),
                     ft.Row([
-                        ft.Text("Productions", size=15, weight="bold", color="#ffffff", font_family="Georgia"),
-                        ft.Text("Ventes journalières", size=15, weight="bold", color="#ffffff", font_family="Georgia"),
+                        ft.Text("Productions", size=15, weight="bold", color="#000000", font_family="Georgia"),
+                        ft.Text("Ventes journalières", size=15, weight="bold", color="#000000", font_family="Georgia"),
                     ], alignment=ft.MainAxisAlignment.SPACE_AROUND),
                     ft.Row([productions_column,vente_jornaliere], alignment=ft.MainAxisAlignment.SPACE_AROUND),
                     ft.Divider(),

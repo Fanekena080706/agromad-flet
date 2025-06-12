@@ -217,7 +217,12 @@
                             }
                         ]
                     },
-                    "vacination": []
+                    "vacination": [
+                        {
+                            "date": "12-06-2025",
+                            "type": "Brucellose"
+                        }
+                    ]
                 }
             ],
             "ventes": {
@@ -254,6 +259,15 @@
                     }
                 ]
             }
+        },
+        {
+            "email": "mijoro@gmail.con",
+            "last_name": "mijoro",
+            "first_name": "rakoto",
+            "password": "12345",
+            "boeufs": [],
+            "ventes": {},
+            "production": {}
         }
     ]
 }

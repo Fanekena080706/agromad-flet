@@ -18,7 +18,7 @@ def accueil_page(page: ft.Page):
     title = ft.Text(
         "AgroMad",
         size=30,
-        color="#ffffff",
+        color="#2e7d32",
         weight=ft.FontWeight.BOLD,
         italic=True,
         text_align=ft.TextAlign.CENTER,
@@ -32,17 +32,25 @@ def accueil_page(page: ft.Page):
         border_radius=50
     )
 
+    logo = ft.Container(
+        content=ft.Image(src="images/logo1.png", width=55, height=55),
+        
+        border_radius=50,
+        bgcolor="#ffffff",
+        padding=5,
+    )
+
     email_connector = ft.Container(
         content=ft.Text(
             connector[0]["email"][0].upper(),  # Get the first letter of the email and convert to uppercase
             size=20,
-            color="#2072EC",
+            color="#2e7d32",
             weight=ft.FontWeight.BOLD,
             text_align=ft.TextAlign.CENTER,
         ),
-        bgcolor="#121212",
+        bgcolor="#E8EAE6",
         border_radius=50,
-        border=ft.border.all(2, "#2072EC"),
+        border=ft.border.all(2, "#2e7d32"),
         height=40,
         width=40,
         alignment=ft.alignment.center,
@@ -53,7 +61,7 @@ def accueil_page(page: ft.Page):
         content=ft.Text(
             connector[0]["last_name"].capitalize() + " " + connector[0]["first_name"].capitalize(),
             size=21,
-            color="#ffffff",
+            color="#424242",
             font_family="Georgia",
             weight=ft.FontWeight.BOLD,
             text_align=ft.TextAlign.CENTER,
@@ -69,8 +77,8 @@ def accueil_page(page: ft.Page):
         email_info.visible = nom_info.visible = letters_info.visible = btn_deconnected.visible = btn_annuler.visible = form_container.visible = visible
         page.update()
 
-    email_info=ft.Text(connector[0]["email"], visible=False, color="#E6EAF1", size=20, font_family="Georgia")
-    nom_info=ft.Text(connector[0]["last_name"].capitalize() + " " + connector[0]["first_name"].capitalize(), visible=False, color="#E6EAF1", size=20, font_family="Georgia")
+    email_info=ft.Text(connector[0]["email"], visible=False, color="#353535", size=20, font_family="Georgia")
+    nom_info=ft.Text(connector[0]["last_name"].capitalize() + " " + connector[0]["first_name"].capitalize(), visible=False, color="#353535", size=20, font_family="Georgia")
     letters_info=ft.Container(
         content=ft.Text(
             connector[0]["email"][0].upper(),  # Get the first letter of the email and convert to uppercase
@@ -120,8 +128,7 @@ def accueil_page(page: ft.Page):
         icon_size=30,
         on_click=lambda e: toggle_form(False),
         visible=False,
-        bgcolor="#0F0E15",
-        icon_color="#E6EAF1",
+        icon_color="#444444",
     )
 
     form_container = ft.Container(
@@ -135,7 +142,7 @@ def accueil_page(page: ft.Page):
             ],alignment=ft.MainAxisAlignment.CENTER,
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
         ),
-        bgcolor="#31353B",
+        bgcolor="#d7f5e9",
         border_radius=10,
         width=300,
         height=250,
@@ -146,7 +153,7 @@ def accueil_page(page: ft.Page):
     )
    
     #colors = [ft.colors.with_opacity(0.5,ft.colors.BLUE_100), ft.colors.with_opacity(0.8,ft.colors.YELLOW_100),ft.colors.with_opacity(0.8,ft.colors.GREEN_100),ft.colors.with_opacity(0.8,ft.colors.RED_100),ft.colors.with_opacity(0.8,ft.colors.PINK_100),ft.colors.with_opacity(0.8,ft.colors.ORANGE_100)]
-    colors = ["#0998ff","#0998ff","#0998ff"]
+    colors = ["#529455","#529455","#529455"]
 
     def generate_categories():
         categories_data = [
@@ -206,7 +213,7 @@ def accueil_page(page: ft.Page):
         ),
         padding=10,
         expand=True,
-        bgcolor="#1A1717",
+        bgcolor="#d3d3d3",
         border_radius=5,
         margin=10,
     )
@@ -214,15 +221,19 @@ def accueil_page(page: ft.Page):
     
     navigation_bar = ft.Container(
         content=ft.NavigationBar(
-            bgcolor="#121416",
+            bgcolor="#424242",
             height=100,
             destinations=[
-                ft.NavigationBarDestination(icon=ft.Icon(ft.icons.PERSON, color="#ffffff", size=40) ),
+                ft.NavigationBarDestination(icon=ft.Icon(ft.icons.PERSON, color="#ffffff", size=40,) ),
                 ft.NavigationBarDestination(icon=ft.Icon(ft.icons.HOME, color="#ffffff", size=40)  ),
                 ft.NavigationBarDestination(icon=ft.Icon(ft.icons.NOTIFICATIONS, color="#ffffff", size=40)  ),
             ],
             on_change=lambda e: change_categories(e.control.selected_index),
             selected_index=1,
+            indicator_color="#2cb977",
+            indicator_shape=ft.RoundedRectangleBorder(
+                radius=20,
+            ),
         ),
         border_radius=20,
         alignment=ft.alignment.top_center,
@@ -243,12 +254,12 @@ def accueil_page(page: ft.Page):
     accueil_container = ft.Column(
         [
             ft.Divider(height=30, color="transparent"), 
-            ft.Row([vide,title,logo_ispm], alignment=ft.MainAxisAlignment.SPACE_AROUND,),
-            ft.Divider(height=3, color="#000000"), 
+            ft.Row([logo,title,logo_ispm], alignment=ft.MainAxisAlignment.SPACE_AROUND,),
+            ft.Divider(height=3, color="#d6d6d6"), 
             ft.Row([utilistateur,vide,email_connector], alignment=ft.MainAxisAlignment.SPACE_AROUND,),
             #title,"#020202"
             #email_connector,
-            ft.Divider(height=3, color="#000000"), 
+            ft.Divider(height=3, color="#d6d6d6"), 
             categories_container,
             navigation_bar,
         ],
@@ -276,7 +287,7 @@ def accueil_page(page: ft.Page):
                 #width=450,  
                 #height=900,
                 gradient=ft.LinearGradient(
-                    colors=["#242222","#16161F"],
+                    colors=["#f7fffc","#f7fffc"],
                     begin=ft.alignment.top_left,
                     end=ft.alignment.bottom_right,
                 )

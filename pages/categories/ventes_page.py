@@ -32,17 +32,18 @@ def get_ventes_page(page: ft.Page):
                                     ft.Text(f"Prix par litre: {vente['prix_litre']:,.2f} Ar", size=14, color="#5a85e8", font_family="Georgia"),
                                     ft.Text(f"Revenu: {vente['revenu']:,.2f} Ar", size=14, color="#5a85e8", font_family="Georgia"),
                                     ft.Row([
+                                        ft.Text(f"{email_connector}", size=10, color="#313132", font_family="Georgia"),
                                         ft.IconButton(
                                             icon=ft.icons.DELETE,
                                             icon_color="red",
                                             on_click=lambda e, jour=b: supprimer_vente_user_click(jour),
                                         )
-                                    ], alignment=ft.MainAxisAlignment.END)
+                                    ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN)
                                 ],
                                 spacing=5,
                             ),
                             border_radius=10,
-                            bgcolor="#3E3E3E",
+                            bgcolor="#C5E0BD",
                             margin=10,
                             padding=ft.padding.only(left=10, right=10, top=0, bottom=10),
                             alignment=ft.alignment.center
@@ -56,7 +57,7 @@ def get_ventes_page(page: ft.Page):
         form_container.visible = litres_field.visible= prix_field.visible = visible
         page.update()
 
-    litres_field = ft.TextField(label="Litres vendus", width=200, color="#ffffff", bgcolor="#1B1B1B", visible=False)
+    litres_field = ft.TextField(label="Litres vendus", width=200, color="#ffffff", bgcolor="#1B1B1B", visible=False, keyboard_type=ft.KeyboardType.NUMBER)
     prix_field = ft.TextField(label="Prix par litre (Ar)", width=200, color="#ffffff", bgcolor="#1B1B1B", keyboard_type=ft.KeyboardType.NUMBER, visible=False)
     message = ft.Text("", color="red", visible=False)
     revenu_field = ft.Text("")
@@ -105,7 +106,7 @@ def get_ventes_page(page: ft.Page):
     enregistrer_btn = ft.IconButton(
         icon=ft.icons.SAVE,
         icon_color="white",
-        bgcolor="#5ab6e8",
+        bgcolor="#2e7d32",
         on_click=lambda e: toggle_form(True),
     )
     
@@ -116,7 +117,7 @@ def get_ventes_page(page: ft.Page):
             ft.Column(
                 controls=[
                     ft.Row([
-                        ft.Text("Ventes de lait", size=20, weight="bold", color="#5ab6e8"),
+                        ft.Text("Ventes de lait", size=20, weight="bold", color="#2e7d32"),
                         enregistrer_btn,
                     ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
                     ft.Divider(),

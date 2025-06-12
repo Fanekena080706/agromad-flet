@@ -25,14 +25,14 @@ def get_production_page(page: ft.Page):
                 for b in a["boeufs"]:
                     if b["actif"] and b["production"]:
                         liste_journaliere.controls.append(
-                            ft.Text(f"Production du boeuf {b['id']}({b['nom']})", size=18, weight="bold", color="#ffffff", font_family="Georgia")
+                            ft.Text(f"Production du boeuf {b['id']}({b['nom']})", size=18, weight="bold", color="#666666", font_family="Georgia")
                         )
                         for jour in b["production"]:
                             liste_journaliere.controls.append(
                                 ft.Container(
                                     content=ft.Column(
                                         controls=[
-                                            ft.Text(f"      Date: {jour}:", size=15, weight="bold", color="#FFAF75", font_family="Arial"),
+                                            ft.Text(f"      Date: {jour}:", size=15, weight="bold", color="#FAAD28", font_family="Arial"),
                                             ft.Column(
                                                 controls=[
                                                     ft.Text(f"   Litres: {prod['litres']}", size=14, color="#5a89f8", font_family="Georgia")
@@ -41,17 +41,18 @@ def get_production_page(page: ft.Page):
                                                 spacing=5,
                                             ),
                                             ft.Row([
+                                                ft.Text(f"{email_connector}", size=10, color="#313132", font_family="Georgia"),
                                                 ft.IconButton(
                                                     icon=ft.icons.DELETE,
                                                     icon_color="red",
                                                     on_click=lambda e, id_boeuf=b["id"]:supprimer_prod_user_click(jour, id_boeuf),
                                                 )
-                                            ], alignment=ft.MainAxisAlignment.END)
+                                            ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN)
                                         ],
                                         spacing=7,
                                     ),
                                     border_radius=10,
-                                    bgcolor="#3E3E3E",
+                                    bgcolor="#C5E0BD",
                                     margin=10,
                                     padding=ft.padding.only(left=10, right=10, top=0, bottom=10),
                                     alignment=ft.alignment.center
@@ -96,7 +97,7 @@ def get_production_page(page: ft.Page):
         color="#ffffff",
     )
 
-    litres_field = ft.TextField(label="Litres de lait", width=200,visible=True, color="#ffffff")
+    litres_field = ft.TextField(label="Litres de lait", width=200,visible=True, color="#ffffff",keyboard_type=ft.KeyboardType.NUMBER)
 
     form_container = ft.Container(
         content=ft.Column(
@@ -126,7 +127,7 @@ def get_production_page(page: ft.Page):
     add_button = ft.IconButton(
         icon=ft.icons.ADD,
         icon_color="white",
-        bgcolor="#5ab6e8",
+        bgcolor="#2e7d32",
         tooltip="Ajouter une production",
         on_click=lambda e: toggle_form(True)
     )
@@ -136,7 +137,7 @@ def get_production_page(page: ft.Page):
             ft.Column(
                 controls=[
                     ft.Row([
-                        ft.Text("Production de lait", size=20, weight="bold",color="#5ab6e8"),
+                        ft.Text("Production de lait", size=20, weight="bold",color="#2e7d32"),
                         add_button,
                     ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
                     ft.Divider(),

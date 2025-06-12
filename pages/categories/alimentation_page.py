@@ -20,12 +20,7 @@ def get_alimentaton_content():
     content = ft.Column(
         controls=[
             ft.Text("Gestion d'alimentation", size=25, width="bold", color="#83e85a"),
-            ft.Divider(height=10, color="transparent"),
-            ft.Row([image, text],alignment=ft.MainAxisAlignment.START,width=400),
-            ft.Divider(height=10, color="transparent"),
-            ft.Row([image, text],alignment=ft.MainAxisAlignment.START,width=400),
-            ft.Row([image, text],alignment=ft.MainAxisAlignment.START,width=400),
-            ft.Row([image, text],alignment=ft.MainAxisAlignment.START,width=400),
+            
         ],
         scroll="auto",
         expand=True,

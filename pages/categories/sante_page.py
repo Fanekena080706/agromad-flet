@@ -29,11 +29,11 @@ def get_boeufs_page(page: ft.Page):
                     if b["actif"]:
                         rows_vacin = []
                         nbVacin = len(b["vacination"])
-                        for v in range(0, len(b["vacination"]), 2):
-                            row_vacin = b["vacination"][v:v+2]
+                        for v in range(0, len(b["vacination"]), 1):
+                            row_vacin = b["vacination"][v:v+1]
                             row = ft.Row(
                                 [
-                                    ft.Text(f"✔️-{cat["type"]} ", color="#ffffff", size=15, font_family="Georgia", italic=True,bgcolor="#9c9c9c")
+                                    ft.Text(f"✔️-{cat["type"]} ", color="#5a85e8", size=15, font_family="Georgia", italic=True,)
                                 for j, cat in enumerate(row_vacin)
                                 ],
                                 alignment=ft.MainAxisAlignment.SPACE_AROUND,
@@ -46,43 +46,43 @@ def get_boeufs_page(page: ft.Page):
                             ft.Container(
                                 content=ft.Column([
                                     ft.Row([
-                                        ft.Text(f"ID: {b['id']}", color="#ffffff", size=22, font_family="Georgia"),
-                                        ft.Text(f"Nom: {b['nom']}", color="#ffffff", size=22, font_family="Georgia"),
-                                    ],  alignment=ft.MainAxisAlignment.SPACE_AROUND, expand=True),
-
-                                    ft.Row([
-                                        ft.Container(
-                                            content=ft.Text(f"🐄 {b['race']}", color="#ffffff", size=17, weight="bold"),
-                                            bgcolor="#303338",  
-                                            padding=2,
-                                            border_radius=3,
-                                            width=150,
-                                            height=100,
-                                            alignment=ft.alignment.center
-                                        ),
-                                    
-                                        ft.Container(
-                                            content=ft.Text(f"Sexe:{b['sexe']}", color="#ffffff", size=17, weight="bold"),
-                                            bgcolor="#21000a",  
-                                            padding=2,
-                                            border_radius=3,
-                                            width=150,
-                                            height=70,
-                                            alignment=ft.alignment.center,
-                                        ),
+                                        ft.Column([
+                                            ft.Text(f"ID: {b['id']}", color="#5a85e8", size=22, font_family="Georgia"),
+                                            ft.Text(f"Nom: {b['nom']}", color="#5a85e8", size=22, font_family="Georgia"),
+                                            ft.Container(
+                                                content=ft.Text(f"🐄 {b['race']}", color="#F9ECEC", size=17, weight="bold"),
+                                                bgcolor="#9AE283",  
+                                                padding=2,
+                                                border_radius=3,
+                                                width=150,
+                                                height=50,
+                                                alignment=ft.alignment.center,
+                                            ),
+                                        
+                                            ft.Container(
+                                                content=ft.Text(f"Sexe:{b['sexe']}", color="#EEE4E4", size=17, weight="bold"),
+                                                bgcolor="#2e7d32",  
+                                                padding=2,
+                                                border_radius=3,
+                                                width=150,
+                                                height=50,
+                                                alignment=ft.alignment.center,
+                                            ),
+                                        ]),
+                                        ft.Column([
+                                            ft.Text(f"{nbVacin} Vacin effectuée:", color="#FFAF75", size=15, weight="bold"),
+                                            ft.Column(rows_vacin, scroll=ft.ScrollMode.AUTO, expand=True,alignment=ft.MainAxisAlignment.START),
+                                        ]),
                                     ], alignment= ft.MainAxisAlignment.SPACE_AROUND, expand=True),
-
-                                    ft.Text(f"{nbVacin} Vaccin effectuée:", color="#9ea7ae", size=15, weight="bold"),
-
-                                    ft.Column(rows_vacin, scroll=ft.ScrollMode.AUTO, expand=True,alignment=ft.MainAxisAlignment.START,),
                                     ft.Row([
+                                        ft.Text(f"{email_connector}", size=10, color="#313132", font_family="Georgia"),
                                         ft.IconButton(
                                             icon=ft.icons.DELETE,
                                             icon_color="red",
                                             tooltip="Supprimer",
                                             on_click=lambda e, id=b["id"]: supprimer_boeuf_click(id)
                                         ),
-                                    ], alignment=ft.MainAxisAlignment.END),
+                                    ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
                                     
                                 ],
                                 alignment= ft.MainAxisAlignment.START,
@@ -90,7 +90,7 @@ def get_boeufs_page(page: ft.Page):
                                 expand=True
                                 ),
                                 
-                                bgcolor="#3E3E3E",  # Couleur de fond
+                                bgcolor="#C5E0BD",  # Couleur de fond
                                 padding=10,
                                 border_radius=5,
                                 margin=ft.margin.only(bottom=5), # Marge entre les éléments
@@ -101,15 +101,15 @@ def get_boeufs_page(page: ft.Page):
                     else:
                         rows_vacin = []
                         nbVacin = len(b["vacination"])
-                        for v in range(0, len(b["vacination"]), 2):
-                            row_vacin = b["vacination"][v:v+2]
+                        for v in range(0, len(b["vacination"]), 1):
+                            row_vacin = b["vacination"][v:v+1]
                             row = ft.Row(
                                 [
-                                    ft.Text(f"✔️-{cat["type"]} ", color="#ffffff", size=15, font_family="Georgia", italic=True,bgcolor="#9c9c9c")
+                                    ft.Text(f"✔️-{cat["type"]} ", color="#5a85e8", size=15, font_family="Georgia", italic=True,)
                                 for j, cat in enumerate(row_vacin)
                                 ],
                                 alignment=ft.MainAxisAlignment.SPACE_AROUND,
-                                height=30,
+                                height='auto',
                                 expand=True
                             )
                             rows_vacin.append(row)
@@ -117,50 +117,53 @@ def get_boeufs_page(page: ft.Page):
                         boeufs_list.controls.append(
                             ft.Container(
                                 content=ft.Column([
-                                    ft.Row([
-                                        ft.Text(f"ID: {b['id']}", color="#ffffff", size=18, font_family="Georgia"),
-                                        ft.Text(f"Nom: {b['nom']}", color="#ffffff", size=18, font_family="Georgia"),
-                                    ],  alignment=ft.MainAxisAlignment.SPACE_AROUND, expand=True),
-
-                                    ft.Row([
-                                        ft.Container(
-                                            content=ft.Text(f"🐄 {b['race']}", color="#ffffff", size=17, weight="bold"),
-                                            bgcolor="#303338",  
-                                            padding=2,
-                                            border_radius=3,
-                                            width=150,
-                                            height=70,
-                                            alignment=ft.alignment.center,
-                                        ),
                                     
-                                        ft.Container(
-                                            content=ft.Text(f"Sexe:{b['sexe']}", color="#ffffff", size=17, weight="bold"),
-                                            bgcolor="#011c2f",  
-                                            padding=2,
-                                            border_radius=3,
-                                            width=150,
-                                            height=70,
-                                            alignment=ft.alignment.center,
-                                        ),
+                                    ft.Row([
+                                        ft.Column([
+                                            ft.Text(f"ID: {b['id']}", color="#5a85e8", size=22, font_family="Georgia"),
+                                            ft.Text(f"Nom: {b['nom']}", color="#5a85e8", size=22, font_family="Georgia"),
+                                            ft.Container(
+                                                content=ft.Text(f"🐄 {b['race']}", color="#F9ECEC", size=17, weight="bold"),
+                                                bgcolor="#9AE283",  
+                                                padding=2,
+                                                border_radius=3,
+                                                width=150,
+                                                height=50,
+                                                alignment=ft.alignment.center,
+                                            ),
+                                        
+                                            ft.Container(
+                                                content=ft.Text(f"Sexe:{b['sexe']}", color="#EEE4E4", size=17, weight="bold"),
+                                                bgcolor="#2e7d32",  
+                                                padding=2,
+                                                border_radius=3,
+                                                width=150,
+                                                height=50,
+                                                alignment=ft.alignment.center,
+                                            ),
+                                        ]),
+                                        ft.Column([
+                                            ft.Text(f"{nbVacin} Vacin effectuée:", color="#FFAF75", size=15, weight="bold"),
+                                            ft.Column(rows_vacin, scroll=ft.ScrollMode.AUTO, expand=True,alignment=ft.MainAxisAlignment.START),
+                                        ]),
                                     ], alignment= ft.MainAxisAlignment.SPACE_AROUND, expand=True),
 
-                                    ft.Text(f"{nbVacin} Vacin effectuée:", color="#9ea7ae", size=15, weight="bold"),
 
-                                    ft.Column(rows_vacin, scroll=ft.ScrollMode.AUTO, expand=True,alignment=ft.MainAxisAlignment.START),
                                     ft.Row([
+                                        ft.Text(f"{email_connector}", size=10, color="#313132", font_family="Georgia"),
                                         ft.IconButton(
                                             icon=ft.icons.DELETE,
                                             icon_color="red",
                                             tooltip="Supprimer",
                                             on_click=lambda e, id=b["id"]: supprimer_boeuf_click(id)
                                         ),
-                                    ], alignment=ft.MainAxisAlignment.END),
+                                    ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
                                 ],
                                 alignment= ft.MainAxisAlignment.START,
                                 horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                                 expand=True
                                 ),
-                                bgcolor="#3E3E3E",  # Couleur de fond
+                                bgcolor="#C5E0BD",  # Couleur de fond
                                 padding=10,
                                 border_radius=5,
                                 margin=ft.margin.only(bottom=5), # Marge entre les éléments
@@ -189,9 +192,9 @@ def get_boeufs_page(page: ft.Page):
         page.update()
     
     # Champs de formulaire (initialement invisibles)
-    id_field = ft.TextField(label="ID du bœuf", visible=False, color="#ffffff")
-    nom_field = ft.TextField(label="Nom du bœuf", visible=False, color="#ffffff")
-    race_field = ft.TextField(label="Race", visible=False, color="#ffffff")
+    id_field = ft.TextField(label="ID du bœuf", visible=False, color="#000000")
+    nom_field = ft.TextField(label="Nom du bœuf", visible=False, color="#000000")
+    race_field = ft.TextField(label="Race", visible=False, color="#000000")
     sexe_field = ft.Dropdown(
         label="Sexe",
         options=[
@@ -199,7 +202,7 @@ def get_boeufs_page(page: ft.Page):
             ft.dropdown.Option("male"),
         ],
         visible=False,
-        color="#ffffff",
+        color="#000000",
     )
     
     # Conteneur pour le formulaire flottant
@@ -218,13 +221,13 @@ def get_boeufs_page(page: ft.Page):
             ],
             spacing=10
         ),
-        bgcolor="#292a2e",
+        bgcolor="#929292",
         padding=20,
         border_radius=10,
         visible=False,
         width=350,
-        top=40,
-        left=20,
+        top=10,
+        left=15,
         expand=False
     )
     
@@ -235,7 +238,7 @@ def get_boeufs_page(page: ft.Page):
     add_button = ft.IconButton(
         icon=ft.icons.ADD,
         icon_color="white",
-        bgcolor="#5ab6e8",
+        bgcolor="#2e7d32",
         tooltip="Ajouter un bœuf",
         on_click=lambda e: toggle_form(True)
     )
@@ -245,7 +248,7 @@ def get_boeufs_page(page: ft.Page):
             ft.Column(
                 controls=[
                     ft.Row([
-                        ft.Text("Liste des bœufs", size=25, weight="bold", color="#5ab6e8"),
+                        ft.Text("Liste des bœufs", size=25, weight="bold", color="#2e7d32"),
                         add_button
                     ], alignment="spaceBetween"),
                     ft.Divider(),

@@ -2,7 +2,7 @@ import flet as ft
 
 
 def welcome_page(page: ft.Page):
-    
+    page.window_icon = 'assets/icon.png'
     page.padding = 0
     page.title = "AgroMad"
     page.bgcolor = "#2cb977"  
@@ -41,6 +41,8 @@ def welcome_page(page: ft.Page):
             if current_text_index == len(texts) - 1:
                 but.text = "Commencer"
                 but.update()
+            progress_bar.value = (current_text_index + 1) / len(texts)
+            progress_bar.update()
         else:
             # Animation de transition vers la page de login
             main_container.opacity = 0
@@ -65,7 +67,7 @@ def welcome_page(page: ft.Page):
     textAgro = ft.Text(
         "AgroMad",
         size=30,
-        color="#ffffff",
+        color="#205072",
         weight=ft.FontWeight.BOLD,
         font_family="Georgia",
     )
@@ -79,10 +81,12 @@ def welcome_page(page: ft.Page):
         height=65,
         border_radius=50,
     )
-    logo=ft.Image(
-        src="images/logo.png",
-        width=180,
-        height=180,
+    logo = ft.Column(
+        controls=[
+            ft.Image(src="images/logo1.png", width=150, height=150),
+            textAgro,
+        ],
+        alignment=ft.MainAxisAlignment.CENTER,
     )
 
     welcome = ft.Text(
@@ -122,17 +126,22 @@ def welcome_page(page: ft.Page):
         border_radius=10,
     )
 
-    
+    progress_bar = ft.ProgressBar(
+        value=(current_text_index + 1) / len(texts),
+        width=300,
+        color="#56C596"
+    )
 
     but = ft.ElevatedButton(
-        text="Next",
+        text="Suivant",
         width=200,
         height=40,
-        bgcolor="#ffffff",
-        color="#0998ff",
+        bgcolor="#205072",
+        color="#ffffff",
         animate_scale=ft.Animation(200, "easeInOut"),
         on_click=navigate_to_intro,
-        style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=0)),
+        style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=20)),
+        
     )
 
     contText = ft.Container(
@@ -140,6 +149,7 @@ def welcome_page(page: ft.Page):
             [
                 #ft.Row([image1,image2], alignment=ft.MainAxisAlignment.SPACE_AROUND),
                 agro_text,
+                progress_bar,
                 #ft.Divider(height=50, color="transparent"),
                 #but,
             ],
@@ -153,16 +163,18 @@ def welcome_page(page: ft.Page):
         opacity=1,
         margin=20,
         #expand=True,
-        #bgcolor="white",
+        bgcolor="#cff4d2",
         shadow=[
             ft.BoxShadow(
-                blur_radius=100,
+                blur_radius=1,
                 spread_radius=1,
-                color=ft.colors.WHITE,
+                color="#7be495",
                 offset=ft.Offset(2,2),
             )
         ],
         alignment=ft.alignment.center,
+        border_radius=20,
+        animate_opacity=ft.Animation(500, "easeInOut"),
     )
 
     welcome_container =ft.Column(
@@ -183,7 +195,7 @@ def welcome_page(page: ft.Page):
 
     centered_container = ft.Stack(
         controls=[
-            #ft.Image(src="images/bg11.jpg", width=ft.Window.width, height=ft.Window.height, fit=ft.ImageFit.COVER, border_radius=20, opacity=1),
+            ft.Image(src="images/bg7.jpeg", width=float('inf'), height=float('inf'), fit=ft.ImageFit.COVER, border_radius=20, opacity=1, expand=True),
             
             ft.Container(
                 content=ft.Column(
@@ -199,11 +211,11 @@ def welcome_page(page: ft.Page):
                 #width=450,  
                 #height=900,
                 blur=ft.Blur(1.5,1.5),
-                gradient=ft.LinearGradient(
-                    colors=["#0998ff"],
-                    begin=ft.alignment.top_center,
-                    end=ft.alignment.bottom_center,
-                ),
+                #gradient=ft.LinearGradient(
+                    #colors=["#cff4d2", "#7be495"],
+                    #begin=ft.alignment.top_center,
+                    #end=ft.alignment.bottom_center,
+                #),
                 expand=True,
             )
         ]

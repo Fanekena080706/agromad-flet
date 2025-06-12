@@ -36,7 +36,7 @@ def register_page(page: ft.Page):
     title = ft.Text(
         "AgroMad",
         size=30,
-        color="#ffffff",
+        color="#2e7d32",
         font_family="Georgia",
         weight=ft.FontWeight.BOLD,
         text_align=ft.TextAlign.CENTER,
@@ -44,20 +44,25 @@ def register_page(page: ft.Page):
     signUp = ft.Text(
         "Inscription",
         size=17,
-        color="#ffffff",
+        color="#2e7d32",
         weight=ft.FontWeight.W_600,
         text_align=ft.TextAlign.CENTER,
         font_family="Georgia",
         italic=True,
     )
+
+    logo =ft.Image(src="images/logo1.png", width=50, height=50)
+
+        
+    
     
     last_name_field = ft.Container(
-        border=ft.border.only(bottom=ft.BorderSide(width=1, color=ft.colors.WHITE)),
+        border=ft.border.only(bottom=ft.BorderSide(width=1, color=ft.colors.BLACK)),
         content=ft.TextField(
             label="Nom",
             hint_text="Entrez votre nom",
-            color=ft.colors.WHITE,
-            bgcolor="#3e3e3f",
+            color=ft.colors.BLACK,
+            bgcolor="#cff4d2",
             filled=True,
             border=ft.InputBorder.NONE,
         ),
@@ -66,12 +71,12 @@ def register_page(page: ft.Page):
     )
 
     first_name_field = ft.Container(
-        border=ft.border.only(bottom=ft.BorderSide(width=1, color=ft.colors.WHITE)),
+        border=ft.border.only(bottom=ft.BorderSide(width=1, color=ft.colors.BLACK)),
         content=ft.TextField(
             label="Prénom",
             hint_text="Entrez votre prénom",
-            color=ft.colors.WHITE,
-            bgcolor="#3e3e3f",
+            color=ft.colors.BLACK,
+            bgcolor="#cff4d2",
             filled=True,
             border=ft.InputBorder.NONE,
         ),
@@ -81,12 +86,12 @@ def register_page(page: ft.Page):
 
 
     email_field = ft.Container(
-        border=ft.border.only(bottom=ft.BorderSide(width=1, color=ft.colors.WHITE)),
+        border=ft.border.only(bottom=ft.BorderSide(width=1, color=ft.colors.BLACK)),
         content=ft.TextField(
             label="Email",
             hint_text="Entrez votre email",
-            color=ft.colors.WHITE,
-            bgcolor="#3e3e3f",
+            color=ft.colors.BLACK,
+            bgcolor="#cff4d2",
             filled=True,
             border=ft.InputBorder.NONE,
         ),
@@ -95,12 +100,12 @@ def register_page(page: ft.Page):
     )
 
     password_field = ft.Container(
-        border=ft.border.only(bottom=ft.BorderSide(width=1, color=ft.colors.WHITE)),
+        border=ft.border.only(bottom=ft.BorderSide(width=1, color=ft.colors.BLACK)),
         content=ft.TextField(
             label="Mot de passe",
             hint_text="Entrer votre mot de passe",
-            color=ft.colors.WHITE,
-            bgcolor="#3e3e3f",
+            color=ft.colors.BLACK,
+            bgcolor="#cff4d2",
             filled=True,
             password=True,
             can_reveal_password=True,
@@ -111,12 +116,12 @@ def register_page(page: ft.Page):
     )
 
     confirm_password_field = ft.Container(
-        border=ft.border.only(bottom=ft.BorderSide(width=1, color=ft.colors.WHITE)),
+        border=ft.border.only(bottom=ft.BorderSide(width=1, color=ft.colors.BLACK)),
         content=ft.TextField(
             label="Confirmation du mot de passe",
             hint_text="Confirme votre mot de passe",
-            color=ft.colors.WHITE,
-            bgcolor="#3e3e3f",
+            color=ft.colors.BLACK,
+            bgcolor="#cff4d2",
             filled=True,
             password=True,
             can_reveal_password=True,
@@ -161,7 +166,7 @@ def register_page(page: ft.Page):
         text="S'inscrire",
         width=200,
         height=40,
-        bgcolor="#267BFA",
+        bgcolor="#2e7d32",
         color="#ffffff",
         style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=0)),
         on_click=inscription,
@@ -171,25 +176,25 @@ def register_page(page: ft.Page):
     formulaire = ft.Container(
         content=ft.Column(
             [
-                signUp, 
-                ft.Row([ft.Icon(name=ft.icons.PERSON,size=40,color="#267BFA"),last_name_field],alignment=ft.MainAxisAlignment.START,expand=True),
-                ft.Row([ft.Icon(name=ft.icons.PERSON_4_SHARP,size=40,color="#267BFA"),first_name_field],alignment=ft.MainAxisAlignment.START,expand=True),
-                ft.Row([ft.Icon(name=ft.icons.EMAIL,size=40,color="#267BFA"),email_field],alignment=ft.MainAxisAlignment.START,expand=True),
-                ft.Row([ft.Icon(name=ft.icons.LOCK,size=40,color="#267BFA"),password_field],alignment=ft.MainAxisAlignment.START,expand=True),
-                ft.Row([ft.Icon(name=ft.icons.VERIFIED_USER,size=40,color="#267BFA"),confirm_password_field],alignment=ft.MainAxisAlignment.START,expand=True),
+                logo, 
+                ft.Row([ft.Icon(name=ft.icons.PERSON,size=40,color="#424242"),last_name_field],alignment=ft.MainAxisAlignment.START,expand=True),
+                ft.Row([ft.Icon(name=ft.icons.PERSON_4_SHARP,size=40,color="#424242"),first_name_field],alignment=ft.MainAxisAlignment.START,expand=True),
+                ft.Row([ft.Icon(name=ft.icons.EMAIL,size=40,color="#424242"),email_field],alignment=ft.MainAxisAlignment.START,expand=True),
+                ft.Row([ft.Icon(name=ft.icons.LOCK,size=40,color="#424242"),password_field],alignment=ft.MainAxisAlignment.START,expand=True),
+                ft.Row([ft.Icon(name=ft.icons.VERIFIED_USER,size=40,color="#424242"),confirm_password_field],alignment=ft.MainAxisAlignment.START,expand=True),
                 message,
                 signup_button,
             ],
             alignment=ft.MainAxisAlignment.CENTER,
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
         ),
-        bgcolor="#272525",
+        bgcolor="#fff8e1",
         padding=20,
         margin=10,
         border_radius=5,
         width=400,
-        height=430,
-        shadow=ft.BoxShadow(blur_radius=20, color="#18191b", offset=(2, 4)),
+        height=470,
+        shadow=ft.BoxShadow(blur_radius=20, color="#4d6453", offset=(2, 4)),
         opacity=0.8,
     )
 
@@ -228,7 +233,7 @@ def register_page(page: ft.Page):
                 #width=450,  
                 #height=900,
                 gradient=ft.LinearGradient(
-                    colors=["#242222","#16161F"],
+                    colors=["#f7fffc","#f7fffc"],
                     begin=ft.alignment.top_center,
                     end=ft.alignment.bottom_center,
                 )

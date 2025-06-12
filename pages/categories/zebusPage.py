@@ -39,10 +39,10 @@ def zebus_page(page: ft.Page):
         alignment=ft.alignment.center,
         expand=True,
         animate_opacity=animate_opacity(300),
-        bgcolor="#0D0D0D",
+        bgcolor="#f4fbf4",
         padding=8,
         border_radius=5,
-        shadow=ft.BoxShadow(blur_radius=20, color="#0e1013", offset=(2, 4)),
+        shadow=ft.BoxShadow(blur_radius=20, color="#a8cec0", offset=(2, 4)),
     )
 
     def change_page(e):
@@ -59,7 +59,7 @@ def zebus_page(page: ft.Page):
         
         for item in nav_bar.controls:
             if item.data == current_page.value:
-                item.border = ft.border.only(bottom=ft.border.BorderSide(3, "#D1C4C4"))
+                item.border = ft.border.only(bottom=ft.border.BorderSide(3, "#6d4c41"))
             else:
                 item.border = None
         page.update()
@@ -83,20 +83,20 @@ def zebus_page(page: ft.Page):
             content=ft.Column(
                 [
                     ft.Container(
-                        border=ft.border.all(2, "#D1C4C4"),
+                        border=ft.border.all(2, "#6d4c41"),
                         border_radius=50,
                         content=ft.IconButton(
                             icon=type["icon"],
                             data=type["type"],
                             on_click=change_page,
-                            bgcolor= "#050505",
-                            style=ft.ButtonStyle(color="#D1C4C4"),
+                            bgcolor= "#F2F2F2",
+                            style=ft.ButtonStyle(color="#6d4c41"),
                             
                         )
                     ),
                     ft.Text(
                         type["type"],
-                        color="#D1C4C4",
+                        color="#6d4c41",
                         size=12,
                         weight="bold",
                         text_align=ft.TextAlign.CENTER,
@@ -108,7 +108,7 @@ def zebus_page(page: ft.Page):
             data=type["type"],
             on_click=change_page,
             padding=10,
-            border=ft.border.only(bottom=ft.border.BorderSide(3, "#D1C4C4")) if type["type"] == current_page.value else None,
+            border=ft.border.only(bottom=ft.border.BorderSide(3, "#6d4c41")) if type["type"] == current_page.value else None,
             animate=ft.animation.Animation(300, "easeInOut"),
         )
         nav_items.append(nav_item)
@@ -140,7 +140,7 @@ def zebus_page(page: ft.Page):
                         ft.Text(
                             "AgroMad",
                             size=30,
-                            color="#ffffff",
+                            color="#2e7d32",
                             weight=ft.FontWeight.BOLD,
                             expand=True,
                             text_align=ft.TextAlign.CENTER,
@@ -155,7 +155,7 @@ def zebus_page(page: ft.Page):
                     alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
                     vertical_alignment=ft.CrossAxisAlignment.CENTER,
                 ),
-                ft.Divider(color="#000000", height=5),
+                ft.Divider(color="#d6d6d6", height=5),
                 ft.Container(
                     content=nav_bar,
                     padding=ft.padding.only(top=20, bottom=20),
@@ -194,7 +194,7 @@ def zebus_page(page: ft.Page):
                 #height=900,
                 gradient=ft.LinearGradient(
                     #colors=["#f0f1fa","#e4e4e4"],
-                    colors=["#242222","#16161F"],
+                    colors=["#f7fffc","#f7fffc"],
                     begin=ft.alignment.top_left,
                     end=ft.alignment.bottom_right,
                 )
